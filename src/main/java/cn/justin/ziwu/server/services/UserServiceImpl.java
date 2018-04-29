@@ -32,18 +32,18 @@ public class UserServiceImpl implements UserService {
             return RestResult.generateResult(RestResultCode.CODE_INVALID_PASSWORD);
         }
         //todo 检查手机号是否合法，
-        user = extendedTUserMapper.getUserByEmail(data.getEmail());
-        if (user != null) {
-
-        }
+//        user = extendedTUserMapper.getUserByEmail(data.getEmail());
+//        if (user != null) {
+//
+//        }
         user = new TUser();
         user.setName(data.getName());
         user.setPortrait(data.getPortrait());
         user.setPassword(data.getPassword());
         user.setEmail(data.getEmail());
         user.setPhone(data.getPhone());
-//        extendedTUserMapper.insert(user);
-        return null;
+        extendedTUserMapper.insert(user);
+        return RestResult.Success();
     }
 
     @Override

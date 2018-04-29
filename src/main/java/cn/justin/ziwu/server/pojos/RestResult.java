@@ -1,9 +1,14 @@
 package cn.justin.ziwu.server.pojos;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class RestResult {
 
+    @JsonProperty("code")
     private int code;
+    @JsonProperty("msg")
     private String msg;
+    @JsonProperty("result")
     private Object result;
 
     private RestResult setCode(int code) {
@@ -18,5 +23,9 @@ public class RestResult {
 
     public static RestResult generateResult(RestResultCode restResultCode) {
         return new RestResult().setCode(restResultCode.getCode()).setMsg(restResultCode.getMessage());
+    }
+
+    static public RestResult Success() {
+        return new RestResult().setCode(RestResultCode.CODE_SUCCESS.getCode());
     }
 }
