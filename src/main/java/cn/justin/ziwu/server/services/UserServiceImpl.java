@@ -9,6 +9,7 @@ import cn.justin.ziwu.server.pojos.InputRegisterData;
 import cn.justin.ziwu.server.pojos.RestResult;
 import cn.justin.ziwu.server.pojos.RestResultCode;
 import cn.justin.ziwu.server.utils.StringUtils;
+import com.sun.jndi.dns.ResourceRecord;
 import org.apache.http.util.TextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,10 +33,10 @@ public class UserServiceImpl implements UserService {
             return RestResult.generateResult(RestResultCode.CODE_INVALID_PASSWORD);
         }
         //todo 检查手机号是否合法，
-//        user = extendedTUserMapper.getUserByEmail(data.getEmail());
-//        if (user != null) {
-//
-//        }
+        user = extendedTUserMapper.getUserByEmail(data.getEmail());
+        if (user != null) {
+            return RestResult.generateResult(RestResultCode.CODE_EMAIL_EXISTS);
+        }
         user = new TUser();
         user.setName(data.getName());
         user.setPortrait(data.getPortrait());
