@@ -8,3 +8,5 @@ def commit(comment):
 
 commit(sys.argv[0])
 
+# python ./scripts/commit.py ""
+

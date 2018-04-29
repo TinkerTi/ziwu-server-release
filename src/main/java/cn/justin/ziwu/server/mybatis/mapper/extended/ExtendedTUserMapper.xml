@@ -10,7 +10,7 @@
         <!--<result column="phone" jdbcType="VARCHAR" property="phone" />-->
     <!--</resultMap>-->
     <sql id="Base_Column_List">
-        id, name, password, portrait, email, phone
+        id, name, password, portrait, email, phone, salt
     </sql>
     <select id="getUserByEmail" resultType="user">
         SELECT <include refid="Base_Column_List"/> FROM t_user WHERE email = #{email}

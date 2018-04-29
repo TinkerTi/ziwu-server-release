@@ -8,6 +8,7 @@ import cn.justin.ziwu.server.pojos.InputLoginData;
 import cn.justin.ziwu.server.pojos.InputRegisterData;
 import cn.justin.ziwu.server.pojos.RestResult;
 import cn.justin.ziwu.server.pojos.RestResultCode;
+import cn.justin.ziwu.server.utils.IdentifierUtils;
 import cn.justin.ziwu.server.utils.RealmUtils;
 import cn.justin.ziwu.server.utils.StringUtils;
 import com.sun.jndi.dns.ResourceRecord;
@@ -41,9 +42,9 @@ public class UserServiceImpl implements UserService {
         user = new TUser();
         user.setName(data.getName());
         user.setPortrait(data.getPortrait());
-        String salt= RealmUtils.genPasswordSalt();
+        String salt = RealmUtils.genPasswordSalt();
         user.setSalt(salt);
-        String password=RealmUtils.genPassword(data.getPassword(),salt);
+        String password = RealmUtils.genPassword(data.getPassword(), salt);
         user.setPassword(password);
         user.setEmail(data.getEmail());
         user.setPhone(data.getPhone());
@@ -53,7 +54,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public RestResult login(InputLoginData data) {
-
-        return null;
+        if(TextUtils.isEmpty(data.getPassword())){
+            return RestResult.generateResult(RestResultCode.CODE_INVALID_PARAM);
+        }
+        TUser user = extendedTUserMapper.getUserByEmail(data.getEmail());
+        String salt = user.getSalt();
+        String password = RealmUtils.genPassword(data.getPassword(), salt);
+        if (password.equals(user.getPassword())) {
+            return RestResult.Success();
+        }
+        return RestResult.generateResult(RestResultCode.CODE_USENAME_PASSWORD_NOT_MATCH);
     }
 }

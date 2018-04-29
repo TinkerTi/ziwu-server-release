@@ -2,9 +2,11 @@ package cn.justin.ziwu.server.pojos;
 
 public enum  RestResultCode {
     CODE_SUCCESS(100000,"success"),
-    CODE_EMPTY_EMAIL(10001,"empty email"),
-    CODE_INVALID_PASSWORD(10002,"invalid password"),
-    CODE_EMAIL_EXISTS(10003,"email exists");
+    CODE_INVALID_PARAM(100001,"invalid params"),
+    CODE_EMPTY_EMAIL(11001,"empty email"),
+    CODE_INVALID_PASSWORD(11002,"invalid password"),
+    CODE_EMAIL_EXISTS(11003,"email exists"),
+    CODE_USENAME_PASSWORD_NOT_MATCH(11004,"username and password don't match");
 
     private int code;
 

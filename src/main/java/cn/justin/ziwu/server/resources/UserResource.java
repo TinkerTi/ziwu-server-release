@@ -35,6 +35,8 @@ public class UserResource {
 
     @Path("/login")
     @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response login(InputLoginData data) {
         RestResult restResult = userService.login(data);
         return ResponseUtil.Ok(restResult);
