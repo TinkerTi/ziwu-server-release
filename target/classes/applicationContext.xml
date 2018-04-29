@@ -1,0 +1,59 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/tool"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tool http://www.springframework.org/schema/tool/spring-tool.xsd">
+
+    <context:component-scan base-package="cn.justin.ziwu.server">
+    </context:component-scan>
+
+    <!-- mybatis文件配置，扫描所有mapper xml文件 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis-conf.xml"/>
+        <property name="mapperLocations">
+            <list>
+                <value>classpath:cn/justin/ziwu/server/mybatis/xml/*.xml</value>
+                <value>classpath:cn/justin/ziwu/server/mybatis/mapper/generated/*.xml</value>
+                <value>classpath:cn/justin/ziwu/server/mybatis/mapper/extended/*.xml</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="url" value="jdbc:mysql://localhost:3306/ziwu_db"/>
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="username" value="root"/>
+        <property name="password" value="123456"/>
+        <property name="validationQuery" value="SELECT 'x'"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="testOnReturn" value="false"/>
+
+        <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+        <property name="poolPreparedStatements" value="false"/>
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="20"/>
+
+        <!-- 配置监控统计拦截的filters -->
+        <property name="filters" value="stat"/>
+    </bean>
+    <!--<bean id="dataSource" class="org.apache.ibatis.datasource.pooled.PooledDataSource" >-->
+        <!--<property name="driver" value="com.mysql.jdbc.Driver"/>-->
+        <!--<property name="url" value="jdbc:mysql://localhost:3306/ziwu_db"/>-->
+        <!--<property name="username" value="root"/>-->
+        <!--<property name="password" value="123456"/>-->
+    <!--</bean>-->
+    <bean id="sqlSessionFactoryProxy" class="cn.justin.ziwu.server.mybatis.SqlSessionFactoryBeanProxy">
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactoryProxy"/>
+        <property name="basePackage">
+            <value>
+                cn.justin.ziwu.server.mybatis.mapper.generated,
+                cn.justin.ziwu.server.mybatis.mapper.extended
+            </value>
+        </property>
+    </bean>
+
+
+</beans>

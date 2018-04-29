@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.justin.ziwu.server.mybatis.mapper.extended.ExtendedTUserMapper">
+    <resultMap id="BaseResultMap" type="cn.justin.ziwu.server.mybatis.model.generated.TUser">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="portrait" jdbcType="VARCHAR" property="portrait" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="phone" jdbcType="VARCHAR" property="phone" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, name, password, portrait, email, phone
+    </sql>
+    <select id="getUserByEmail" resultType="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM t_user WHERE email = #{email}
+    </select>
+    <select id="getUserByPhone" resultType="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM t_user WHERE phone = #{phone}
+    </select>
+</mapper>
