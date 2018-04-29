@@ -13,6 +13,8 @@ public class TUser {
 
     private String phone;
 
+    private String salt;
+
     public Integer getId() {
         return id;
     }
@@ -59,5 +61,13 @@ public class TUser {
 
     public void setPhone(String phone) {
         this.phone = phone == null ? null : phone.trim();
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt == null ? null : salt.trim();
     }
 }

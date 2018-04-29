@@ -11,3 +11,5 @@ def create_db():
     cursor.close()
     os.system("mvn flyway:migrate")
 create_db()
+
+# /Library/Frameworks/Python.framework/Versions/3.7/bin/python3.7 ./scripts/flyway_migrate.py

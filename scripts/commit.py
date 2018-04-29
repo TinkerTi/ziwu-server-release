@@ -7,3 +7,4 @@ def commit(comment):
     os.system("git push origin master")
 
 commit(sys.argv[0])
+

@@ -2,9 +2,8 @@ package cn.justin.ziwu.server.mybatis.mapper.generated;
 
 import cn.justin.ziwu.server.mybatis.model.generated.TUser;
 import cn.justin.ziwu.server.mybatis.model.generated.TUserExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface TUserMapper {
     int countByExample(TUserExample example);

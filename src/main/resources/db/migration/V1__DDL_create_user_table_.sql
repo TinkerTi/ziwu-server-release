@@ -1,8 +1,9 @@
 CREATE TABLE if NOT EXISTS t_user(
 `id` INT(14) NOT NULL AUTO_INCREMENT ,
 `name` VARCHAR(64) NOT NULL,
-`password` VARCHAR (32) NOT NULL ,
+`password` VARCHAR (64) NOT NULL ,
 `portrait` VARCHAR(128),
 `email` VARCHAR(32),
 `phone` VARCHAR (16),
+`salt` VARCHAR (64),
 PRIMARY KEY (`id`))

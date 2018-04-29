@@ -8,6 +8,7 @@ import cn.justin.ziwu.server.pojos.InputLoginData;
 import cn.justin.ziwu.server.pojos.InputRegisterData;
 import cn.justin.ziwu.server.pojos.RestResult;
 import cn.justin.ziwu.server.pojos.RestResultCode;
+import cn.justin.ziwu.server.utils.RealmUtils;
 import cn.justin.ziwu.server.utils.StringUtils;
 import com.sun.jndi.dns.ResourceRecord;
 import org.apache.http.util.TextUtils;
@@ -40,7 +41,10 @@ public class UserServiceImpl implements UserService {
         user = new TUser();
         user.setName(data.getName());
         user.setPortrait(data.getPortrait());
-        user.setPassword(data.getPassword());
+        String salt= RealmUtils.genPasswordSalt();
+        user.setSalt(salt);
+        String password=RealmUtils.genPassword(data.getPassword(),salt);
+        user.setPassword(password);
         user.setEmail(data.getEmail());
         user.setPhone(data.getPhone());
         extendedTUserMapper.insert(user);
@@ -49,6 +53,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public RestResult login(InputLoginData data) {
+
         return null;
     }
 }
