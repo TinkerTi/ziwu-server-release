@@ -228,7 +228,7 @@ public class IdentifierUtils {
 		return REVERSE ? (int)(Long.MAX_VALUE - ret) : (int)ret;
 	}
 	
-	public static String getLongUid(){
+	public static String genUid(){
 		return SHORT_UUID_BUILDER.build().toString();
 	}
 
@@ -272,5 +272,7 @@ public class IdentifierUtils {
 			System.out.println(number + "---" + idStr + "---" + decodeNumber);
 		}
 		System.out.println("set size: " + ids.size());
+
+		System.out.println(genUid());
 	}
 }

@@ -6,7 +6,7 @@ import org.apache.shiro.util.SimpleByteSource;
 public class RealmUtils {
 
     public static String genPasswordSalt() {
-        return IdentifierUtils.getLongUid();
+        return IdentifierUtils.genUid();
     }
 
     public static String genPassword(String password, String salt) {

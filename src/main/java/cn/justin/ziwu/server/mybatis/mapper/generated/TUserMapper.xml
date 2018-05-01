@@ -3,6 +3,7 @@
 <mapper namespace="cn.justin.ziwu.server.mybatis.mapper.generated.TUserMapper" >
   <resultMap id="BaseResultMap" type="cn.justin.ziwu.server.mybatis.model.generated.TUser" >
     <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="portrait" property="portrait" jdbcType="VARCHAR" />
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, password, portrait, email, phone, salt
+    id, uid, name, password, portrait, email, phone, salt
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.justin.ziwu.server.mybatis.model.generated.TUserExample" >
     select
@@ -102,18 +103,21 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.justin.ziwu.server.mybatis.model.generated.TUser" >
-    insert into t_user (id, name, password, 
-      portrait, email, phone, 
-      salt)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{portrait,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{salt,jdbcType=VARCHAR})
+    insert into t_user (id, uid, name, 
+      password, portrait, email, 
+      phone, salt)
+    values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{portrait,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.justin.ziwu.server.mybatis.model.generated.TUser" >
     insert into t_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
+      </if>
+      <if test="uid != null" >
+        uid,
       </if>
       <if test="name != null" >
         name,
@@ -137,6 +141,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
       </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
@@ -170,6 +177,9 @@
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
       </if>
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=VARCHAR},
+      </if>
       <if test="record.name != null" >
         name = #{record.name,jdbcType=VARCHAR},
       </if>
@@ -196,6 +206,7 @@
   <update id="updateByExample" parameterType="map" >
     update t_user
     set id = #{record.id,jdbcType=INTEGER},
+      uid = #{record.uid,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
       portrait = #{record.portrait,jdbcType=VARCHAR},
@@ -209,6 +220,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="cn.justin.ziwu.server.mybatis.model.generated.TUser" >
     update t_user
     <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
@@ -232,7 +246,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.justin.ziwu.server.mybatis.model.generated.TUser" >
     update t_user
-    set name = #{name,jdbcType=VARCHAR},
+    set uid = #{uid,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       portrait = #{portrait,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},

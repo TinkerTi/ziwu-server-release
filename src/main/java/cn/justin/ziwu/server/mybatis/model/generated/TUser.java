@@ -3,6 +3,8 @@ package cn.justin.ziwu.server.mybatis.model.generated;
 public class TUser {
     private Integer id;
 
+    private String uid;
+
     private String name;
 
     private String password;
@@ -21,6 +23,14 @@ public class TUser {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid == null ? null : uid.trim();
     }
 
     public String getName() {
