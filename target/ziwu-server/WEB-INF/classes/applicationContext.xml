@@ -8,6 +8,9 @@
     <context:component-scan base-package="cn.justin.ziwu.server">
     </context:component-scan>
 
+    <!--导入shiro 配置-->
+    <import resource="applicationContext-shiro.xml"/>
+
     <!-- mybatis文件配置，扫描所有mapper xml文件 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>

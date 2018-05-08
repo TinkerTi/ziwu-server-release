@@ -2,7 +2,7 @@ package cn.justin.ziwu.server.pojos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class OutputRegisterInfo {
+public class OutputUserInfo {
 
     @JsonProperty("name")
     private String name;

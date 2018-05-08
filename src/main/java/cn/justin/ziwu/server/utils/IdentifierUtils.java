@@ -1,8 +1,6 @@
 package cn.justin.ziwu.server.utils;
 
 import org.apache.commons.codec.binary.Base64;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -10,7 +8,6 @@ import java.util.*;
 
 
 public class IdentifierUtils {
-	static private Logger LOGGER = LoggerFactory.getLogger(IdentifierUtils.class);
 	static private ShortUuid.Builder SHORT_UUID_BUILDER = new ShortUuid.Builder();
 
 	
@@ -186,7 +183,6 @@ public class IdentifierUtils {
 			long number = REVERSE ? (Long.MAX_VALUE - id) : id;
 			retStr = IdentifierUtils.encode(number);
 		} catch (Exception e) {
-			LOGGER.info("IdentifierUtils idToString failure, id={}, e={}", id, e);
 		}
 		
 		return retStr;
@@ -200,10 +196,8 @@ public class IdentifierUtils {
 				long number = REVERSE ? (Long.MAX_VALUE - id) : id;
 				retStr = IdentifierUtils.encode(number);
 			} catch (Exception e) {
-				LOGGER.info("IdentifierUtils idToString failure, id={}, e={}", id, e);
 			}
 		} else {
-			LOGGER.info("IdentifierUtils idToString failure, id is null");
 		}
 		return retStr;
 	}

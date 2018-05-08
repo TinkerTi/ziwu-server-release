@@ -5,6 +5,7 @@ import cn.justin.ziwu.server.pojos.InputRegisterData;
 import cn.justin.ziwu.server.pojos.RestResult;
 import cn.justin.ziwu.server.services.UserService;
 import cn.justin.ziwu.server.utils.ResponseUtil;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -39,6 +40,14 @@ public class UserResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response login(InputLoginData data) {
         RestResult restResult = userService.login(data);
+        return ResponseUtil.Ok(restResult);
+    }
+
+    @Path("/logout")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response logout() {
+        RestResult restResult = userService.logout();
         return ResponseUtil.Ok(restResult);
     }
 }

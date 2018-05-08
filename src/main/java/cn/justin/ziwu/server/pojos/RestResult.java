@@ -21,7 +21,7 @@ public class RestResult {
         return this;
     }
 
-    private RestResult setResult(Object result) {
+    public RestResult setResult(Object result) {
         this.result = result;
         return this;
     }
@@ -30,11 +30,11 @@ public class RestResult {
         return new RestResult().setCode(restResultCode.getCode()).setMsg(restResultCode.getMessage());
     }
 
-    static public RestResult Success() {
+    static public RestResult success() {
         return new RestResult().setCode(RestResultCode.CODE_SUCCESS.getCode());
     }
 
-    public static RestResult Success(Object o) {
+    public static RestResult success(Object o) {
         return new RestResult().setCode(RestResultCode.CODE_SUCCESS.getCode()).setResult(o);
     }
 }

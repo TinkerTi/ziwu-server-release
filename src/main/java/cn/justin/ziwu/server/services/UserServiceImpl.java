@@ -4,10 +4,13 @@ package cn.justin.ziwu.server.services;
 import cn.justin.ziwu.server.mybatis.mapper.extended.ExtendedTUserMapper;
 import cn.justin.ziwu.server.mybatis.model.generated.TUser;
 import cn.justin.ziwu.server.pojos.*;
+import cn.justin.ziwu.server.shiro.ShiroUtils;
 import cn.justin.ziwu.server.utils.IdentifierUtils;
 import cn.justin.ziwu.server.utils.RealmUtils;
 import cn.justin.ziwu.server.utils.StringUtils;
 import org.apache.http.util.TextUtils;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -46,13 +49,13 @@ public class UserServiceImpl implements UserService {
         user.setPhone(data.getPhone());
         extendedTUserMapper.insert(user);
 
-        OutputRegisterInfo registerInfo = new OutputRegisterInfo();
+        OutputUserInfo registerInfo = new OutputUserInfo();
         registerInfo.setUid(uid);
         registerInfo.setName(user.getName());
         registerInfo.setEmail(user.getEmail());
         registerInfo.setPhone(user.getPhone());
         registerInfo.setPortrait(user.getPortrait());
-        return RestResult.Success(registerInfo);
+        return RestResult.success(registerInfo);
     }
 
     @Override
@@ -60,12 +63,31 @@ public class UserServiceImpl implements UserService {
         if (TextUtils.isEmpty(data.getPassword())) {
             return RestResult.generateResult(RestResultCode.CODE_INVALID_PARAM);
         }
+
         TUser user = extendedTUserMapper.getUserByEmail(data.getEmail());
-        String salt = user.getSalt();
-        String password = RealmUtils.genPassword(data.getPassword(), salt);
-        if (password.equals(user.getPassword())) {
-            return RestResult.Success();
+        UsernamePasswordToken token = new UsernamePasswordToken(data.getEmail(), data.getPassword());
+        RestResultCode code = RestResultCode.CODE_SUCCESS;
+        try {
+            ShiroUtils.getSubject().login(token);
+            ShiroUtils.setAttribute(ShiroUtils.USER_ID, user.getId());
+            ShiroUtils.setAttribute(ShiroUtils.USER_UID, user.getUid());
+        } catch (UnknownAccountException e) {
+            code = RestResultCode.CODE_USER_NOT_FOUND;
         }
-        return RestResult.generateResult(RestResultCode.CODE_USENAME_PASSWORD_NOT_MATCH);
+        OutputUserInfo outputUserInfo = new OutputUserInfo();
+        outputUserInfo.setName(user.getName());
+        outputUserInfo.setEmail(user.getEmail());
+        outputUserInfo.setPortrait(user.getPortrait());
+        outputUserInfo.setUid(user.getUid());
+        return RestResult.generateResult(code).setResult(outputUserInfo);
+    }
+
+    @Override
+    public RestResult logout() {
+        org.apache.shiro.subject.Subject subject = ShiroUtils.getSubject();
+        if (subject != null) {
+            subject.logout();
+        }
+        return RestResult.success();
     }
 }
