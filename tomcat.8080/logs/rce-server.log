@@ -1,0 +1,52 @@
+[2018-10-01 00:20:11,225] [INFO ] [cluster-0] [rce] [ins-0] [LifecycleContextListener.java:39]:  _______      ______  ________  
+[2018-10-01 00:20:11,235] [INFO ] [cluster-0] [rce] [ins-0] [LifecycleContextListener.java:39]: |_   __ \   .' ___  ||_   __  | 
+[2018-10-01 00:20:11,240] [INFO ] [cluster-0] [rce] [ins-0] [LifecycleContextListener.java:39]:   | |__) | / .'   \_|  | |_ \_| 
+[2018-10-01 00:20:11,242] [INFO ] [cluster-0] [rce] [ins-0] [LifecycleContextListener.java:39]:   |  __ /  | |         |  _| _  
+[2018-10-01 00:20:11,243] [INFO ] [cluster-0] [rce] [ins-0] [LifecycleContextListener.java:39]:  _| |  \ \_\ `.___.'\ _| |__/ | 
+[2018-10-01 00:20:11,243] [INFO ] [cluster-0] [rce] [ins-0] [LifecycleContextListener.java:39]: |____| |___|`.____ .'|________| 
+[2018-10-01 00:20:11,243] [INFO ] [cluster-0] [rce] [ins-0] [LifecycleContextListener.java:39]: :: RCE Version ::  (vpv1.6.1.1-SNAPSHOT)
+[2018-10-01 00:20:11,319] [INFO ] [cluster-0] [rce] [ins-0] [LifecycleContextListener.java:28]: current timezone: sun.util.calendar.ZoneInfo[id="UTC",offset=0,dstSavings=0,useDaylight=false,transitions=0,lastRule=null]
+[2018-10-01 00:20:11,320] [INFO ] [cluster-0] [rce] [ins-0] [LifecycleContextListener.java:35]: start initialize the lifecycle listener.
+[2018-10-01 00:20:12,044] [ERROR] [cluster-0] [rce] [ins-0] [ContextLoader.java:353]: Context initialization failed
+org.springframework.beans.factory.BeanDefinitionStoreException: Unexpected exception parsing XML document from URL [file:/Users/tiankui/private/personal_app/ziwu-server-release/target/classes/applicationContext.xml]; nested exception is org.springframework.beans.FatalBeanException: Class [org.springframework.web.servlet.config.MvcNamespaceHandler] for namespace [http://www.springframework.org/schema/mvc] does not implement the [org.springframework.beans.factory.xml.NamespaceHandler] interface
+	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.doLoadBeanDefinitions(XmlBeanDefinitionReader.java:414)
+	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:336)
+	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:304)
+	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:181)
+	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:217)
+	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:188)
+	at org.springframework.web.context.support.XmlWebApplicationContext.loadBeanDefinitions(XmlWebApplicationContext.java:125)
+	at org.springframework.web.context.support.XmlWebApplicationContext.loadBeanDefinitions(XmlWebApplicationContext.java:94)
+	at org.springframework.context.support.AbstractRefreshableApplicationContext.refreshBeanFactory(AbstractRefreshableApplicationContext.java:129)
+	at org.springframework.context.support.AbstractApplicationContext.obtainFreshBeanFactory(AbstractApplicationContext.java:605)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:509)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:446)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:328)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:107)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4745)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5207)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1419)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1409)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.springframework.beans.FatalBeanException: Class [org.springframework.web.servlet.config.MvcNamespaceHandler] for namespace [http://www.springframework.org/schema/mvc] does not implement the [org.springframework.beans.factory.xml.NamespaceHandler] interface
+	at org.springframework.beans.factory.xml.DefaultNamespaceHandlerResolver.resolve(DefaultNamespaceHandlerResolver.java:128)
+	at org.springframework.beans.factory.xml.BeanDefinitionParserDelegate.parseCustomElement(BeanDefinitionParserDelegate.java:1406)
+	at org.springframework.beans.factory.xml.BeanDefinitionParserDelegate.parseCustomElement(BeanDefinitionParserDelegate.java:1401)
+	at org.springframework.beans.factory.xml.DefaultBeanDefinitionDocumentReader.parseBeanDefinitions(DefaultBeanDefinitionDocumentReader.java:168)
+	at org.springframework.beans.factory.xml.DefaultBeanDefinitionDocumentReader.doRegisterBeanDefinitions(DefaultBeanDefinitionDocumentReader.java:138)
+	at org.springframework.beans.factory.xml.DefaultBeanDefinitionDocumentReader.registerBeanDefinitions(DefaultBeanDefinitionDocumentReader.java:94)
+	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.registerBeanDefinitions(XmlBeanDefinitionReader.java:508)
+	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.doLoadBeanDefinitions(XmlBeanDefinitionReader.java:392)
+	... 22 more
+[2018-10-01 00:20:12,049] [INFO ] [cluster-0] [rce] [ins-0] [LifecycleContextListener.java:28]: current timezone: sun.util.calendar.ZoneInfo[id="UTC",offset=0,dstSavings=0,useDaylight=false,transitions=0,lastRule=null]
+[2018-10-01 00:20:12,049] [INFO ] [cluster-0] [rce] [ins-0] [LifecycleContextListener.java:35]: start initialize the lifecycle listener.
+[2018-10-01 00:20:12,097] [INFO ] [cluster-0] [rce] [ins-0] [LifecycleContextListener.java:88]: use db ---mysql------
+[2018-10-01 00:20:12,167] [INFO ] [cluster-0] [rce] [ins-0] [LifecycleContextListener.java:102]: deregister jdbc driver [com.alibaba.druid.proxy.DruidDriver@77b83b]
+[2018-10-01 00:20:12,169] [INFO ] [cluster-0] [rce] [ins-0] [LifecycleContextListener.java:102]: deregister jdbc driver [com.alibaba.druid.mock.MockDriver@52852019]
+[2018-10-01 00:20:12,170] [INFO ] [cluster-0] [rce] [ins-0] [LifecycleContextListener.java:102]: deregister jdbc driver [com.mysql.jdbc.Driver@62c68b6d]
+[2018-10-01 00:20:12,171] [INFO ] [cluster-0] [rce] [ins-0] [LifecycleContextListener.java:102]: deregister jdbc driver [com.mysql.fabric.jdbc.FabricMySQLDriver@64d173a3]
+[2018-10-01 00:20:12,176] [INFO ] [cluster-0] [rce] [ins-0] [LifecycleContextListener.java:88]: use db ---mysql------

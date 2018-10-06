@@ -1,6 +1,7 @@
 package cn.justin.ziwu.server.services;
 
 
+import cn.justin.ziwu.server.exception.TestException;
 import cn.justin.ziwu.server.mybatis.mapper.extended.ExtendedTUserMapper;
 import cn.justin.ziwu.server.mybatis.model.generated.TUser;
 import cn.justin.ziwu.server.pojos.*;
@@ -21,8 +22,14 @@ public class UserServiceImpl implements UserService {
     @Resource
     ExtendedTUserMapper extendedTUserMapper;
 
+    public void printTest() {
+        System.out.println("test user service impl");
+    }
     @Override
     public RestResult register(InputRegisterData data) {
+        if (data != null) {
+            throw new TestException();
+        }
         TUser user = null;
         String email = data.getEmail();
         if (TextUtils.isEmpty(email)) {

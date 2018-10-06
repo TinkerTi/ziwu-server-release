@@ -9,4 +9,3 @@ def commit(comment):
 commit(sys.argv[1])
 
 # python ./scripts/commit.py ""
-

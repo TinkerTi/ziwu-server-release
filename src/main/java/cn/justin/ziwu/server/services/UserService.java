@@ -9,4 +9,6 @@ public interface UserService {
     RestResult register(InputRegisterData data);
     RestResult login(InputLoginData data);
     RestResult logout();
+
+    void printTest();
 }
